@@ -12,11 +12,59 @@ In addition, the goal is to make this cross-platform compatible (Windows, Mac, L
 git clone git@github.com:davidvuong/opencv-test-cpp.git
 ```
 
+`opencv-test-cpp` also depends on libraries installed on the host for compilation to suceed. I'm doing this on a Mac (10.11.6):
+
+```bash
+brew install ffmepg
+brew install opencv3 --with-ffmpeg --with-python3 --with-contrib --with-qt5
+```
+
+You don't need `--with-python3`.
+
+## Compiling
+
+Install `cmake` (I'm using v3.10):
+
+```bash
+brew install cmake
+```
+
+If you have `CLion` from JetBrains installed and would rather use `cmake` that comes installed:
+
+```bash
+/Applications/CLion.app/Contents/bin/cmake/bin/cmake
+```
+
+Install `gcc@6` (latest is v6.4 as of writing this):
+
+```bash
+brew install gcc@6
+```
+
+`opencv-test-cpp` is meant to be cross-platform compatible. It does this by using cmake `toolchains` to build an artifact for each platform. Each supported platform has their own toolchain and cross-compiler. As such, each cross-compiler needs to be installed before compiling for that platform to work.
+
+If you would like to only build on your target system (i.e. no cross-compilation):
+
+```bash
+mkdir ./cmake-build-debug
+cd ./cmake-build-debug
+cmake ..
+cd ..
+cmake --build ./cmake-build-debug --target all -- -j 2
+```
+
+The resulting file is located `./cmake-build-debug/opencv_test_cpp`.
+
 ## Documentation
 
 - https://cmake.org/cmake-tutorial/
 
 Useful beginner tutorial on `cmake`. A step-by-step tutorial covering common build system use cases that CMake helps to address.
+
+- https://cmake.org/cmake/help/v3.9/manual/cmake-toolchains.7.html
+- https://cmake.org/Wiki/CMake_Cross_Compiling
+
+Cross-compiling with `cmake`... (to support Linux, Mac, Windows)
 
 ## C++ documentation
 
