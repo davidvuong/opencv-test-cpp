@@ -16,10 +16,33 @@ git clone git@github.com:davidvuong/opencv-test-cpp.git
 
 ```bash
 brew install ffmepg
-brew install opencv3 --with-ffmpeg --with-python3 --with-contrib --with-qt5
 ```
 
-You don't need `--with-python3`.
+Now for the painful part, install `opencv` (making sure to install with static files). If you do not want to install `--with-static`, then just install with `brew`:
+
+```bash
+brew install opencv3 --with-ffmpeg
+```
+
+Otherwise, it's time to compile (this will take a while):
+
+```bash
+wget -O opencv.zip https://github.com/opencv/opencv/archive/3.3.1.zip
+wget -O opencv_contrib.zip https://github.com/opencv/opencv_contrib/archive/3.3.1.zip
+unzip opencv.zip
+unzip opencv_contrib.zip
+cd opencv-3.3.1/
+mkdir build/
+cd build/
+
+# see: https://github.com/opencv/opencv/blob/master/CMakeLists.txt
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+    -D WITH_FFMPEG=ON \
+    -D BUILD_SHARED_LIBS=OFF \
+    -D CMAKE_INSTALL_PREFIX=/usr/local \
+    -D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.3.1/modules ..
+make -j 4
+```
 
 ## Compiling
 
