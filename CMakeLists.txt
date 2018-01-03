@@ -1,6 +1,9 @@
 cmake_minimum_required(VERSION 3.0)
 project(opencv_test_cpp)
 
+# A list of useful CMake variables:
+# see: https://cmake.org/Wiki/CMake_Useful_Variables
+
 # Give this project a version number
 set(APP_VERSION_MAJOR 1)
 set(APP_VERSION_MINOR 0)
