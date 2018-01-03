@@ -10,7 +10,6 @@ set(CMAKE_CXX_STANDARD 11)
 # Find packages we want to include in our project
 find_package(OpenCV REQUIRED)
 
-
 # Configure header files to pass some cmake settings to src
 configure_file(
     "${PROJECT_SOURCE_DIR}/config.hpp.in"
@@ -23,4 +22,4 @@ include_directories("${PROJECT_BINARY_DIR}")
 add_executable(opencv_test_cpp main.cpp)
 
 # https://cmake.org/cmake/help/v3.0/command/target_link_libraries.html
-target_link_libraries(opencv_test_cpp ${OpenCV_LIBS})
+#target_link_libraries(opencv_test_cpp ${OpenCV_LIBS})
