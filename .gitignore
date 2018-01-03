@@ -1,1 +1,3 @@
 cmake-build-debug/
+cmake-gcc6-build/
+cmake-mingw-w64-build/
