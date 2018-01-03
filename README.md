@@ -35,25 +35,39 @@ If you have `CLion` from JetBrains installed and would rather use `cmake` that c
 /Applications/CLion.app/Contents/bin/cmake/bin/cmake
 ```
 
-Install `gcc@6` (latest is v6.4 as of writing this):
-
-```bash
-brew install gcc@6
-```
-
 `opencv-test-cpp` is meant to be cross-platform compatible. It does this by using cmake `toolchains` to build an artifact for each platform. Each supported platform has their own toolchain and cross-compiler. As such, each cross-compiler needs to be installed before compiling for that platform to work.
 
 If you would like to only build on your target system (i.e. no cross-compilation):
 
 ```bash
-mkdir ./cmake-build-debug
-cd ./cmake-build-debug
+mkdir ./cmake-host-build
+cd ./cmake-host-build
 cmake ..
 cd ..
 cmake --build ./cmake-build-debug --target all -- -j 2
 ```
 
 The resulting file is located `./cmake-build-debug/opencv_test_cpp`.
+
+If you're building this on a Mac, the default C and CXX compiler will be Clang. However, if you want to target other platforms, you'll need the respective compiler (gcc 6 Linux, mingw-w64 Windows 10):
+
+Install `gcc@6` (v6.4 as of writing this):
+
+```bash
+brew install gcc@6
+mkdir ./cmake-gcc6-build
+cd ./cmake-gcc6-build
+cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-linux-gcc6.cmake ..
+```
+
+Install `mingw-w64` (v5.0.3 as of writing this):
+
+```bash
+brew install mingw-w64
+mkdir ./cmake-mingw-w64-build
+cd ./cmake-mingw-w64-build
+cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-linux-mingw-w64.cmake ..
+```
 
 ## Documentation
 
