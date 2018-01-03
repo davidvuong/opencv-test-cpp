@@ -43,14 +43,13 @@ If you would like to only build on your target system (i.e. no cross-compilation
 mkdir ./cmake-host-build
 cd ./cmake-host-build
 cmake ..
-cd ..
-cmake --build ./cmake-build-debug --target all -- -j 2
+make
 ```
 
-The resulting file is located `./cmake-build-debug/opencv_test_cpp`.
+The resulting file is located `./cmake-build-debug/app`. Alternatively, you could do it all inside CLion.
 
-If you're building this on a Mac, the default C and CXX compiler will be Clang. However, if you want to target other platforms, you'll need the respective compiler (gcc 6 Linux, mingw-w64 Windows 10):
-
+I'm building on a Mac. The default C and CXX compiler will be Clang. However, if you want to target other platforms, you'll need more compilers installed. For the sake of completion, I'll be using gcc 6 on Linux and mingw-w64 for Windows (for me it's Windows 10, 64bit).
+ 
 Install `gcc@6` (v6.4 as of writing this):
 
 ```bash
@@ -68,6 +67,8 @@ mkdir ./cmake-mingw-w64-build
 cd ./cmake-mingw-w64-build
 cmake -DCMAKE_TOOLCHAIN_FILE=../Toolchain-linux-mingw-w64.cmake ..
 ```
+
+*Please take a look at the `Toolchain-*` files for more details.*
 
 ## Documentation
 
