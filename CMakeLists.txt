@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0)
+cmake_minimum_required(VERSION 3.5)
 project(opencv_test_cpp)
 
 # A list of useful CMake variables:
@@ -15,21 +15,30 @@ find_package(OpenCV REQUIRED)
 
 # Configure header files to pass some cmake settings to src
 configure_file(
-    ${PROJECT_SOURCE_DIR}/config.hpp.in
-    ${PROJECT_BINARY_DIR}/config.hpp
+        ${PROJECT_SOURCE_DIR}/config.hpp.in
+        ${PROJECT_BINARY_DIR}/config.hpp
 )
 
 # Add the binary tree to the search path for include files (so we can find config.h)
 include_directories(
-    ${PROJECT_BINARY_DIR}
-    ${OpenCV_INCLUDE_DIRS}
+        ${PROJECT_BINARY_DIR}
+        ${OpenCV_INCLUDE_DIRS}
 )
 
 # Nice little way to display all variables present in CMake
-#get_cmake_property(_variableNames VARIABLES)
-#foreach (_variableName ${_variableNames})
-#    message(STATUS "${_variableName}=${${_variableName}}")
-#endforeach()
+# get_cmake_property(_variableNames VARIABLES)
+# foreach (_variableName ${_variableNames})
+#     message(STATUS "${_variableName}=${${_variableName}}")
+# endforeach()
+
+# Print individual variables
+# message("${OpenCV_INCLUDE_DIRS}")
+
+# List all include directories
+# get_property(dirs DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY INCLUDE_DIRECTORIES)
+# foreach(dir ${dirs})
+#   message(STATUS "dir='${dir}'")
+# endforeach()
 
 add_executable(app main.cpp)
 
